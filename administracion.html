@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang= "es">
+<head>
+<meta charset= "utf-8"/>
+<link href="estilos.css" rel="stylesheet">
+<!--libreria importante ya que en ela se extrajo la informacion para las actividades que se vaya hacer no modificar ya viene
+por defecto si van a usar las demas tabla pues usar esta liberia para que funcione-->
+<link rel="stylesheet" type="text/css" href="estilo/formulario.css">
+	<link rel="stylesheet" href="estilo/estilos.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme-min.css">
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-3.1.0.js"></script>
+
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+	<link rel="icon" href="images/.png">
+
+
+
+<title>Bicicleta Tours Manta</title>
+</head> 
+<body onload="cargarTodo();">
+	<section>
+		<header>
+			<br>
+			<br>
+			<nav>
+				<div class="upper_navbar">
+					<div class="menu1">
+						<ul>
+							<li><a href="index.html">Inicio</a></li>
+							<li><a href="productos.html">Productos</a></li>
+							<li><a href="Ventas.html">Ventas</a></li>
+							<li><a href="administracion.html">Administrar</a></li>
+							<li><a href="login.html">Ingresar</a></li>
+							<li><a href="acercade.html">Sobre Mi</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+<br>
+
+<!--crea la tabla para mostrar la informacion-->
+<div class="container">
+	<table  class="table table-bordered table-inverse" id="datos">
+
+	<center><h2>Consultas de Ventas</h2></center>
+ <div class="ajustar"> 
+ <div class="input-group">
+  <span class="input-group-addon">Buscar</span>
+  <input id="searchTerm" type="text" onkeyup="doSearch()"  class="form-control"/>
+ <button onclick="limpiar();" type="button" class="btn btn-success">Limpiar</button>
+</div>
+
+<br>
+</div>
+
+		<thead>
+			<tr>
+			<th>Id</th>
+			<th>Cliente</th>
+			<th>Tipo de Producto</th>
+		    <th>Cantidad del producto</th>
+			<th>Precio</th>
+			<th>Total</th>
+			</tr>
+		</thead>
+
+		<tbody id="tbDestino">
+		</tbody>
+	</table></div>
+</section>
+
+	<section>
+		<div class="footer">
+			<div class="footer-content">
+				<div class="footer-refs-content-1">
+					<h5><b>Ventas </b>Manta</h5>
+	                <ul>
+	                	<li><a href="#">Materia: Optativa I</a></li>
+	                	<li><a href="#">Nombre del Docente:Ing. John Cevallos Macias</a></li>
+	                	<li><a href="#">Curso: 7mo. "A"</a></li>
+	            	</ul>
+				</div>
+			</div>
+			<div class="lower-footer">
+				<div class="lower-footer-content">
+					<div id="footer-align-left">
+						Todos los Derechos Reservados a Romero Caval Bryan Alexander
+					</div>
+					<div id="footer-align-right">
+						<a href=""><i class="fab fa-facebook-square fa-3x"></i></a>
+						<a href=""><i class="fab fa-twitter-square fa-3x"></i></a>
+						<a href=""><i class="fab fa-google-plus-square fa-3x"></i></a>
+						<a href=""><i class="fab fa-youtube-square fa-3x"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<script src="function.js"></script>	
+  </body>
+  </html>  
+  
+		<script >
+		//primer script para validación 
+			//validación para solo numero
+			function SoloNumero(e){
+			var key = window.Event ? e.which : e.keyCode
+			return ((key >= 48 && key <= 57) || (key == 45) || (key == 32 ))
+			}
+
+			//validacion para solo letra
+			function ValidarNumero(e){
+			var key = window.Event ? e.which : e.keyCode
+			return ((key >= 48 && key <= 57) || (key == 45) || (key == 44) || (key == 32 ))
+
+			}
+			//validacion para numero con decimales
+
+			function ValidarLetra(e){
+			var key = window.Event ? e.which : e.keyCode
+			return ((key >= 65 && key <= 90 ) || (key == 32) || (key >= 96 && key <= 122 ))
+			}	
+
+		</script>
+
+
+<script >
+//script para realizar todo los calculo de guardado, mostrado, modificado y elimiando 
+var habitacion= {
+	Nota2: [],
+
+}
+
+var cuenta_edicion = null;
+	//proceso para guardar los datos
+	function Guardar(){
+		//obtiene los valores que estan en la caja de texto
+		Código= $("#Código").val();
+		FechaEntrada= $("#FechaEntrada").val();
+		FechaSalida= $("#FechaSalida").val();
+		DiaEstancia= $("#DiaEstancia").val();
+		NúmeroHabitación= $("#NúmeroHabitación").val();
+		Disponibilidad= $("#Disponibilidad").val();
+		NúmeroPersona= $("#NúmeroPersona").val();
+		Precio= $("#Precio").val();
+		Total= $("#Total").val();
+		
+		//se almacena los dato que se obtuvo de la caja de texto en una varia esta en funcion de un vector  
+		//todos los datos que se ha obtenido por las tabla se almacena en cob donde se va a enviar la informacion
+		Cob = {
+			"Código": Código,
+			"FechaEntrada": FechaEntrada,
+			"FechaSalida": FechaSalida,
+			"DiaEstancia": DiaEstancia,
+			"NúmeroHabitación": NúmeroHabitación,
+			"Disponibilidad": Disponibilidad,
+			"NúmeroPersona": NúmeroPersona,
+			"Precio": Precio,
+			"Total": Total};
+		alert("Guardado con exito");
+		
+		//proceso que realiza los botones en la parte inferior para editar los datos y agreggar la informacion
+		//en caso de que si desea modificar solo cambie las variables que se creo en la parte de arriba el codigo no cambiar del todo porque despues alteraria el guardardo de informacion ademas de la edicion
+		if(cuenta_edicion == null){
+			habitacion.Nota2.push(Cob);
+		}else{
+			habitacion.Nota2[cuenta_edicion]= Cob;
+			cuenta_edicion=null;
+		}
+		//acciones que se realiza para guardar esta en la parte inferior
+		GuardarTodo();
+
+		mostrardatos();
+
+	}
+
+
+	function mostrardatos(){
+		//envia los datos que se creó en la tabla con los botones correspodiente para eliminar y modificar
+		destino=document.getElementById('tbDestino');
+		destino.innerHTML="";
+		for(x=0; x < habitacion.Nota2.length; x++){
+			Cob = habitacion.Nota2[x];
+			tr=document.createElement('tr');
+			for(key in Cob){
+				prop= Cob[key];
+				td=document.createElement('td');
+				td.innerHTML= prop;
+				tr.appendChild(td);
+			}
+			//boton eliminar agregado en una columna de la tabla
+			td=document.createElement('td');
+			btn=document.createElement('button');
+			btn.type='button';
+			btn.setAttribute('class', 'btn btn-danger');
+			btn.innerHTML="del";
+			btn.setAttribute('onclick', 'borrarCuenta('+x+');'); 
+			td.appendChild(btn);
+			//boton editar agregado en una columna de la tabla
+			btn=document.createElement('button');
+			btn.type='button';
+			btn.setAttribute('class', 'btn btn-warning');
+			btn.innerHTML="edit";
+			btn.setAttribute('onclick',  'editarCuenta('+x+');'); 
+			//proceso de agregar appendChild lo define como añadir
+			td.appendChild(btn);
+			tr.appendChild(td);
+
+
+
+			destino.appendChild(tr);
+		}
+	}
+ 	//se uso para editar 
+	function editarCuenta(index){
+		cuenta_edicion= index;
+		Cob = habitacion.Nota2[index];
+
+		
+		for(key in Cob){
+			$('#'+ key).val(Cob[key]);
+		}
+	}
+	function GuardarTodo(){
+			
+		//este codigo esta en funcion de guarddo ya que todo los datos se comprimio en una variable
+		localStorage.setItem('asgData', JSON.stringify(habitacion));
+		
+	}
+
+	// esto va en el body para cargar los datos si no lo agregue nunca te va a salir nada de informacion
+	function cargarTodo(){
+		tmp = localStorage.getItem('asgData');
+		if (tmp != null) {
+			habitacion=JSON.parse(tmp);
+		}
+		mostrardatos();
+	}
+	//proceso y mensaje e elimiando
+	function borrarCuenta(index){
+		if(confirm("Seguro que quiere borrar el registro")){ 
+			habitacion.Nota2.splice(index,1);
+			GuardarTodo();
+			mostrardatos();
+		}
+	}
+	//limmpia la caja de texto.
+	function limpiar(){
+		window.location= window.location;
+		
+	}
+
+	 function doSearch()
+        {
+            const tableReg = document.getElementById('datos');
+            const searchText = document.getElementById('searchTerm').value.toLowerCase();
+            let total = 0;
+ 
+            // Recorremos todas las filas con contenido de la tabla
+            for (let i = 1; i < tableReg.rows.length; i++) {
+                // Si el td tiene la clase "noSearch" no se busca en su cntenido
+                if (tableReg.rows[i].classList.contains("noSearch")) {
+                    continue;
+                }
+ 
+                let found = false;
+                const cellsOfRow = tableReg.rows[i].getElementsByTagName('td');
+                // Recorremos todas las celdas
+                for (let j = 0; j < cellsOfRow.length && !found; j++) {
+                    const compareWith = cellsOfRow[j].innerHTML.toLowerCase();
+                    // Buscamos el texto en el contenido de la celda
+                    if (searchText.length == 0 || compareWith.indexOf(searchText) > -1) {
+                        found = true;
+                        total++;
+                    }
+                }
+                if (found) {
+                    tableReg.rows[i].style.display = '';
+                } else {
+                    // si no ha encontrado ninguna coincidencia, esconde la
+                    // fila de la tabla
+                    tableReg.rows[i].style.display = 'none';
+                }
+            }
+ 
+            // mostramos las coincidencias
+            const lastTR=tableReg.rows[tableReg.rows.length-1];
+            const td=lastTR.querySelector("td");
+            lastTR.classList.remove("hide", "red");
+            if (searchText == "") {
+                lastTR.classList.add("hide");
+            } else if (total) {
+              
+            } else {
+                lastTR.classList.add("red");
+            }
+        }
+</script>
